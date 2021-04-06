@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom'
 import '../home/home.less'
 
-export default function BaseExample() {
+export default function BaseExample () {
   return (
     <Router>
       <div className="container">
@@ -23,25 +23,25 @@ export default function BaseExample() {
           </li>
         </ul>
 
-        <hr/>
-
-        <Switch>
-          <Route exact path="/">
-            <Home />
-          </Route>
-          <Route path="/about">
-            <About />
-          </Route>
-          <Route path="/dashboard">
-            <Dashboard />
-          </Route>
-        </Switch>
+        <section className="page-wrap">
+          <Switch>
+            <Route exact path="/">
+              <Home />
+            </Route>
+            <Route path="/about">
+              <About />
+            </Route>
+            <Route path="/dashboard">
+              <Dashboard />
+            </Route>
+          </Switch>
+        </section>
       </div>
     </Router>
   )
 }
 
-function Home() {
+function Home () {
   return (
     <div>
       <h2>Home</h2>
@@ -49,7 +49,7 @@ function Home() {
   )
 }
 
-function About() {
+function About () {
   return (
     <div>
       <h2>About</h2>
@@ -57,7 +57,7 @@ function About() {
   )
 }
 
-function Dashboard() {
+function Dashboard () {
   return (
     <div>
       <h2>Dashboard</h2>
