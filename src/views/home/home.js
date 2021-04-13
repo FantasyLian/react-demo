@@ -1,5 +1,4 @@
 import React from 'react'
-
 export default class Home extends React.Component {
   // eslint-disable-next-line no-useless-constructor
   constructor(props) {
