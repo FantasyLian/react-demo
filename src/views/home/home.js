@@ -8,8 +8,8 @@ export default class Home extends React.Component {
   render () {
     return (
       <div>
-        <a href='#/detail'>去detail</a>
-        <button onClick={() => this.props.history.push('detail')}>通过函数去detail</button>
+        <a href='#/login'>去登录</a>
+        <button onClick={() => this.props.history.push('login')}>通过函数去登录</button>
       </div>
     )
   }

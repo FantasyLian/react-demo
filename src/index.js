@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import 'normalize.css'
 import './styles/index.css'
+import 'antd/dist/antd.css'
 import Router from './router/index'
 import reportWebVitals from './reportWebVitals'
 
