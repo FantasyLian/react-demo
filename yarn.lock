@@ -10069,7 +10069,7 @@ react-dom@^17.0.2:
     object-assign "^4.1.1"
     scheduler "^0.20.2"
 
-react-draft-wysiwyg@^1.13.2:
+react-draft-wysiwyg@^1.14.5:
   version "1.14.5"
   resolved "https://registry.npm.taobao.org/react-draft-wysiwyg/download/react-draft-wysiwyg-1.14.5.tgz#82e34ae3472b815b5d9f70615f40e13afcbc2055"
   integrity sha1-guNK40crgVtdn3BhX0DhOvy8IFU=

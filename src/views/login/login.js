@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Particles from 'react-particles-js'
-import { Form, Icon, Input, Button } from 'antd'
+import { Form, Input, Button } from 'antd'
+import { UserOutlined, LockOutlined } from '@ant-design/icons'
 import { connect } from 'react-redux'
 import { setUserInfo } from '@/redux/actions/userInfo'
 import '@/assets/styles/login.less'
@@ -61,12 +62,12 @@ class Login extends Component {
             <FormItem>
               {getFieldDecorator('userName', {
                 rules: [{ required: true, message: '请填写用户名！' }]
-              })(<Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="用户名" />)}
+              })(<Input prefix={<UserOutlined type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="用户名" />)}
             </FormItem>
             <FormItem>
               {getFieldDecorator('password', {
                 rules: [{ required: true, message: '请填写密码！' }]
-              })(<Input.Password prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="密码" />)}
+              })(<Input.Password prefix={<LockOutlined type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="密码" />)}
             </FormItem>
             <FormItem>
               <Button type="primary" htmlType="submit" block onClick={this.login}>
