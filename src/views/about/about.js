@@ -53,7 +53,7 @@ const About = props => {
 			<h1 style={styles.title}>Github</h1>
 			<ul style={styles.list}>
 				<li>
-					<a href="https://github.com/chenjun1127/react-antd-manager" target="_blank" rel="noopener noreferrer">
+					<a href="https://github.com/FantasyLian/react-demo" target="_blank" rel="noopener noreferrer">
 						Github源码
 					</a>
 				</li>
