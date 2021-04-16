@@ -1,16 +1,10 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import 'normalize.css'
-import './styles/index.css'
-import 'antd/dist/antd.css'
-import Router from './router/index'
+import App from './App'
 import reportWebVitals from './reportWebVitals'
 
-ReactDOM.render(
-  <Router />,
-  document.querySelector('#root')
-)
-
+console.log(`Looks like we are in ${process.env.NODE_ENV} mode!`)
+ReactDOM.render(<App />, document.getElementById('root'))
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
