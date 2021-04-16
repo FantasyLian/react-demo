@@ -3,7 +3,6 @@ import { HashRouter, Route, Switch } from 'react-router-dom'
 import Layout from '@/views/layout/Index'
 import Login from '@/views/login/Login'
 import AuthRouter from '@/views/auth/AuthRouter'
-
 const Router = () => {
 	return (
 		<HashRouter>
