@@ -1,5 +1,6 @@
 import React from 'react'
-import { Icon, message } from 'antd'
+import { Icon as LegacyIcon } from '@ant-design/compatible';
+import { message } from 'antd';
 import copy from 'copy-to-clipboard'
 import '@/assets/styles/app.less'
 
@@ -68,7 +69,7 @@ const Index = () => {
       <ul className="list">
         {data.map(item => (
           <li key={id++} onClick={click.bind(this, item)}>
-            <Icon type={item} />
+            <LegacyIcon type={item} />
             <span>{item}</span>
           </li>
         ))}
@@ -82,7 +83,7 @@ const Index = () => {
         </h1>
       </div>
     </div>
-  )
+  );
 }
 
 export default Index

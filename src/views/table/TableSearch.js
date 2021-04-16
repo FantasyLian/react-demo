@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
-import { Table, Row, Col, Button, Form, Select } from 'antd'
+import { SearchOutlined } from '@ant-design/icons';
+import { Form } from '@ant-design/compatible';
+import '@ant-design/compatible/assets/index.css';
+import { Table, Row, Col, Button, Select } from 'antd';
 import request from '@/utils/request'
 const FormItem = Form.Item
 const { Option } = Select
@@ -123,7 +126,7 @@ class TableSearch extends Component {
             </Col>
             <Col span={2} style={{ marginRight: '10px', display: 'flex' }} className="serarch-btns">
               <FormItem>
-                <Button icon="search" type="primary" htmlType="submit" className={'btn'} onClick={this.handleSearch}>
+                <Button icon={<SearchOutlined />} type="primary" htmlType="submit" className={'btn'} onClick={this.handleSearch}>
                   搜索
 								</Button>
               </FormItem>
@@ -137,7 +140,7 @@ class TableSearch extends Component {
         </Form>
         <Table bordered columns={this.state.columns} dataSource={this.state.data} loading={this.state.loading} pagination={paginationProps} rowKey={record => record.location.postcode} rowSelection={rowSelection} />
       </div>
-    )
+    );
   }
 }
 

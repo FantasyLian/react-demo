@@ -1,6 +1,7 @@
 import React from 'react'
 import { withRouter, Link } from 'react-router-dom'
-import { Breadcrumb, Icon } from 'antd'
+import { Icon as LegacyIcon } from '@ant-design/compatible';
+import { Breadcrumb } from 'antd';
 import { menus } from '@/router/menus'
 
 class BreadCrumb extends React.Component {
@@ -52,7 +53,7 @@ class BreadCrumb extends React.Component {
     if (!routes.length) return null
     const itemRender = (route, params, routes, paths) => {
       const last = routes.indexOf(route) === routes.length - 1
-      return last ? <Link to={route.path}>{route.icon && <Icon type={route.icon} />} {route.title}</Link> : <span>{route.icon && <Icon type={route.icon} />} {route.title}</span>
+      return last ? <Link to={route.path}>{route.icon && <LegacyIcon type={route.icon} />} {route.title}</Link> : <span>{route.icon && <LegacyIcon type={route.icon} />} {route.title}</span>;
     }
     return (
       <div className="breadCrumb">

@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter, Link } from 'react-router-dom'
-import { Layout, Menu, Icon } from 'antd'
+import { Icon as LegacyIcon } from '@ant-design/compatible';
+import { Layout, Menu } from 'antd';
 import { setUserInfo } from '@/redux/actions/userInfo'
 import { addTag } from '@/redux/actions/tagList'
 import { menus } from '@/router/menus'
@@ -35,33 +36,29 @@ class SideNenu extends Component {
   renderMenu = data => {
     return data.map(item => {
       if (item.children) {
-        return (
-          this.handleFilter(item.permission) && (
-            <SubMenu
-              key={item.path}
-              title={
-                <span>
-                  {item.icon ? <Icon type={item.icon} /> : ''}
-                  <span>{item.title}</span>
-                </span>
-              }
-            >
-              {this.renderMenu(item.children)}
-            </SubMenu>
-          )
-        )
+        return this.handleFilter(item.permission) && (
+          <SubMenu
+            key={item.path}
+            title={
+              <span>
+                {item.icon ? <LegacyIcon type={item.icon} /> : ''}
+                <span>{item.title}</span>
+              </span>
+            }
+          >
+            {this.renderMenu(item.children)}
+          </SubMenu>
+        );
       }
-      return (
-        this.handleFilter(item.permission) && (
-          <Menu.Item key={item.path}>
-            <Link to={item.path} onClick={() => this.handClickTag(item)}>
-              {item.icon ? <Icon type={item.icon} /> : ''}
-              <span>{item.title}</span>
-            </Link>
-          </Menu.Item>
-        )
-      )
-    })
+      return this.handleFilter(item.permission) && (
+        <Menu.Item key={item.path}>
+          <Link to={item.path} onClick={() => this.handClickTag(item)}>
+            {item.icon ? <LegacyIcon type={item.icon} /> : ''}
+            <span>{item.title}</span>
+          </Link>
+        </Menu.Item>
+      );
+    });
   };
   render () {
     // console.log(this.props);

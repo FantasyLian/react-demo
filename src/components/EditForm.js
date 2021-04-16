@@ -1,5 +1,7 @@
 import React from 'react'
-import { Form, Input, Button } from 'antd'
+import { Form } from '@ant-design/compatible';
+import '@ant-design/compatible/assets/index.css';
+import { Input, Button } from 'antd';
 class EditForm extends React.Component {
   componentWillReceiveProps (nextProps) {
     !nextProps.visible && this.props.form.resetFields()
@@ -57,7 +59,7 @@ class EditForm extends React.Component {
 					</Button>
         </Form.Item>
       </Form>
-    )
+    );
   }
 }
 export default Form.create()(EditForm)

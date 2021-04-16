@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import Particles from 'react-particles-js'
-import { Form, Input, Button } from 'antd'
+import { Form } from '@ant-design/compatible';
+import '@ant-design/compatible/assets/index.css';
+import { Input, Button } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons'
 import { connect } from 'react-redux'
 import { setUserInfo } from '@/redux/actions/userInfo'

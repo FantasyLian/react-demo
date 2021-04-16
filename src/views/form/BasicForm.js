@@ -1,5 +1,8 @@
 import React from 'react'
-import { Form, Input, Tooltip, Icon, Cascader, Select, Row, Col, Checkbox, Button } from 'antd'
+import { QuestionCircleOutlined } from '@ant-design/icons';
+import { Form } from '@ant-design/compatible';
+import '@ant-design/compatible/assets/index.css';
+import { Input, Tooltip, Cascader, Select, Row, Col, Checkbox, Button } from 'antd';
 const { Option } = Select
 
 const residences = [
@@ -155,7 +158,7 @@ class BasicForm extends React.Component {
               <span>
                 昵称&nbsp;
 								<Tooltip title="您希望别人叫你什么？">
-                  <Icon type="question-circle-o" />
+                  <QuestionCircleOutlined />
                 </Tooltip>
               </span>
             }
@@ -203,7 +206,7 @@ class BasicForm extends React.Component {
           </Form.Item>
         </Form>
       </div>
-    )
+    );
   }
 }
 export default Form.create()(BasicForm)
