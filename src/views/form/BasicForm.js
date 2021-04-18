@@ -1,8 +1,8 @@
 import React from 'react'
-import { QuestionCircleOutlined } from '@ant-design/icons';
-import { Form } from '@ant-design/compatible';
-import '@ant-design/compatible/assets/index.css';
-import { Input, Tooltip, Cascader, Select, Row, Col, Checkbox, Button } from 'antd';
+import { QuestionCircleOutlined } from '@ant-design/icons'
+// import { Form } from '@ant-design/compatible';
+// import '@ant-design/compatible/assets/index.css';
+import { Form, Input, Tooltip, Cascader, Select, Row, Col, Checkbox, Button } from 'antd'
 const { Option } = Select
 
 const residences = [
@@ -40,7 +40,7 @@ const residences = [
   }
 ]
 
-class BasicForm extends React.Component {
+export default class BasicForm extends React.Component {
   state = {
     confirmDirty: false
   };
@@ -114,7 +114,7 @@ class BasicForm extends React.Component {
         </div>
         <Form {...formItemLayout} onSubmit={this.handleSubmit}>
           <Form.Item label="邮箱">
-            {getFieldDecorator('emial', {
+            {getFieldDecorator('email', {
               rules: [
                 {
                   type: 'email',
@@ -206,7 +206,6 @@ class BasicForm extends React.Component {
           </Form.Item>
         </Form>
       </div>
-    );
+    )
   }
 }
-export default Form.create()(BasicForm)
