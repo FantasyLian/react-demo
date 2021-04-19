@@ -6,49 +6,49 @@ const treeData = [
   {
     title: '广东省',
     key: '广东省',
-    value: '440000',
+    value: '广东省',
     children: [
       {
         title: '深圳市',
         value: '深圳市',
-        key: '440300',
+        key: '深圳市',
         children: [
           {
             title: '福田区',
             value: '福田区',
-            key: '440304'
+            key: '福田区'
           },
           {
-            title: '南区区',
-            value: '南区区',
-            key: '440305'
+            title: '南山区',
+            value: '南山区',
+            key: '南山区'
           },
           {
             title: '宝安区',
             value: '宝安区',
-            key: '440306'
+            key: '宝安区'
           }
         ]
       },
       {
         title: '广州市',
         value: '广州市',
-        key: '440100',
+        key: '广州市',
         children: [
           {
             title: '荔湾区',
             value: '荔湾区',
-            key: '440103'
+            key: '荔湾区'
           },
           {
             title: '越秀区',
             value: '越秀区',
-            key: '440104'
+            key: '越秀区'
           },
           {
             title: '海珠区',
             value: '海珠区',
-            key: '440105'
+            key: '海珠区'
           }
         ]
       }
@@ -57,22 +57,22 @@ const treeData = [
   {
     title: '湖南省',
     value: '湖南省',
-    key: '430000',
+    key: '湖南省',
     children: [
       {
         title: '长沙市',
         value: '长沙市',
-        key: '430100'
+        key: '长沙市'
       },
       {
         title: '株洲市',
         value: '株洲市',
-        key: '430200'
+        key: '株洲市'
       },
       {
         title: '湘潭市',
         value: '湘潭市',
-        key: '430300'
+        key: '湘潭市'
       }
     ]
   }
@@ -87,7 +87,7 @@ const SelectDemo = () => {
     return children
   }
   return (
-    <Select mode="multiple" style={{ width: '100%' }} placeholder="Please select" onChange={handleChange} allowClear={true}>
+    <Select mode="multiple" style={{ width: '100%' }} placeholder="请选择" onChange={handleChange} allowClear={true}>
       {children()}
     </Select>
   )
@@ -100,7 +100,7 @@ const SelectTreeDemo = () => {
     setValue(value)
   }
 
-  return <TreeSelect showSearch treeCheckable style={{ width: '100%' }} value={value} dropdownStyle={{ maxHeight: 400, overflow: 'auto' }} placeholder="Please select" allowClear multiple treeDefaultExpandAll onChange={onChange} treeData={treeData} />
+  return <TreeSelect showSearch treeCheckable style={{ width: '100%' }} value={value} dropdownStyle={{ maxHeight: 400, overflow: 'auto' }} placeholder="请选择" allowClear multiple treeDefaultExpandAll onChange={onChange} treeData={treeData} />
 }
 const BasicSelect = () => {
   return (

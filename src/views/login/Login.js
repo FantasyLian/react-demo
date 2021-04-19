@@ -1,8 +1,6 @@
 import React from 'react'
 import Particles from 'react-particles-js'
-import { Form } from '@ant-design/compatible';
-import '@ant-design/compatible/assets/index.css';
-import { Input, Button } from 'antd';
+import { Form, Input, Button } from 'antd'
 import { UserOutlined, LockOutlined } from '@ant-design/icons'
 import { connect } from 'react-redux'
 import { setUserInfo } from '@/redux/actions/userInfo'
@@ -10,14 +8,19 @@ import '@/assets/styles/login.less'
 
 const FormItem = Form.Item
 class Login extends React.Component {
-  state = { clientHeight: document.documentElement.clientHeight || document.body.clientHeight };
+  formRef = React.createRef();
+  state = { clientHeight: document.documentElement.clientHeight || document.body.clientHeight }
   constructor(props) {
     super(props)
     this.onResize = this.onResize.bind(this)
   }
-  login = e => {
+  // 登录
+  login (e) {
     e.preventDefault()
-    this.props.form.validateFields((err, values) => {
+    const {
+      form: { validateFields }
+    } = this.props
+    validateFields((err, values) => {
       if (!err) {
         localStorage.setItem('isLogin', '1')
         // 模拟生成一些数据
@@ -28,7 +31,7 @@ class Login extends React.Component {
         console.log(err)
       }
     })
-  };
+  }
   componentDidMount () {
     window.addEventListener('resize', this.onResize)
   }
@@ -43,7 +46,6 @@ class Login extends React.Component {
     this.setState({ clientHeight: document.documentElement.clientHeight || document.body.clientHeight })
   }
   render () {
-    const { getFieldDecorator } = this.props.form
     return (
       <div className="container">
         <Particles
@@ -59,18 +61,19 @@ class Login extends React.Component {
           }}
         />
         <div className="content">
-          <div className="title">后台管理系统</div>
-          <Form className="login-form">
-            <FormItem>
-              {getFieldDecorator('userName', {
-                rules: [{ required: true, message: '请填写用户名！' }]
-              })(<Input prefix={<UserOutlined type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="用户名" />)}
+          <h1 className="title">后台管理系统</h1>
+          <Form className="login-form" ref={this.formRef}>
+            <FormItem name="username" rules={[{ required: true, message: '请填写用户名！' }]}>
+              <Input prefix={<UserOutlined style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="用户名" />
             </FormItem>
-            <FormItem>
-              {getFieldDecorator('password', {
-                rules: [{ required: true, message: '请填写密码！' }]
-              })(<Input.Password prefix={<LockOutlined type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="密码" />)}
+            <FormItem name="password" rules={[{ required: true, message: '请填写密码！' }]} >
+              <Input
+                prefix={<LockOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
+                type="password"
+                placeholder="密码"
+              />
             </FormItem>
+
             <FormItem>
               <Button type="primary" htmlType="submit" block onClick={this.login}>
                 登录
@@ -90,7 +93,8 @@ const mapDispatchToProps = dispatch => ({
     dispatch(setUserInfo(data))
   }
 })
+
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Form.create()(Login))
+)(Login)

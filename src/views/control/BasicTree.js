@@ -1,55 +1,62 @@
 import React from 'react'
-import { Tree, Input, Row, Col } from 'antd'
-const { TreeNode } = Tree
+import { Tree, Input } from 'antd'
 
-const treeData = [
-  {
-    title: '广东省',
-    key: '440000',
-    children: [
-      {
-        title: '深圳市',
-        key: '440300',
-        children: [{ title: '福田区', key: '440304' }, { title: '南区区', key: '440305' }, { title: '宝安区', key: '440306' }]
-      },
-      {
-        title: '广州市',
-        key: '440100',
-        children: [{ title: '荔湾区', key: '440103' }, { title: '越秀区', key: '440104' }, { title: '海珠区', key: '440105' }]
-      }
-    ]
-  },
-  {
-    title: '湖南省',
-    key: '430000',
-    children: [
-      {
-        title: '长沙市',
-        key: '430100'
-      },
-      {
-        title: '株洲市',
-        key: '430200'
-      },
-      {
-        title: '湘潭市',
-        key: '430300'
-      }
-    ]
+const { Search } = Input
+
+const x = 3
+const y = 2
+const z = 1
+const gData = []
+
+const generateData = (_level, _preKey, _tns) => {
+  const preKey = _preKey || '0'
+  const tns = _tns || gData
+
+  const children = []
+  for (let i = 0; i < x; i++) {
+    const key = `${preKey}-${i}`
+    tns.push({ title: key, key })
+    if (i < y) {
+      children.push(key)
+    }
   }
-]
-// 递归查找
-const getKey = (title, data, arr) => {
+  if (_level < 0) {
+    return tns
+  }
+  const level = _level - 1
+  children.forEach((key, index) => {
+    tns[index].children = []
+    return generateData(level, key, tns[index].children)
+  })
+}
+generateData(z)
+
+const dataList = []
+const generateList = data => {
   for (let i = 0; i < data.length; i++) {
-    if (data[i].title.indexOf(title) > -1) {
-      arr.unshift(data[i].key)
-      // break;
-    }
-    if (data[i].children && data[i].children.length > 0) {
-      getKey(title, data[i].children, arr)
+    const node = data[i]
+    const { key } = node
+    dataList.push({ key, title: key })
+    if (node.children) {
+      generateList(node.children)
     }
   }
-  return arr
+}
+generateList(gData)
+
+const getParentKey = (key, tree) => {
+  let parentKey
+  for (let i = 0; i < tree.length; i++) {
+    const node = tree[i]
+    if (node.children) {
+      if (node.children.some(item => item.key === key)) {
+        parentKey = node.key
+      } else if (getParentKey(key, node.children)) {
+        parentKey = getParentKey(key, node.children)
+      }
+    }
+  }
+  return parentKey
 }
 
 class BasicTree extends React.Component {
@@ -57,39 +64,27 @@ class BasicTree extends React.Component {
     expandedKeys: [],
     searchValue: '',
     autoExpandParent: true,
-    checkedKeys: []
-  };
-  onSelect = (selectedKeys, info) => {
-    console.log('selected', selectedKeys, info)
-  };
-
-  onCheck = (checkedKeys, info) => {
-    console.log('onCheck', checkedKeys, info)
-    this.setState({ checkedKeys })
   };
 
   onExpand = expandedKeys => {
     this.setState({
       expandedKeys,
-      autoExpandParent: false
+      autoExpandParent: false,
     })
   };
 
   onChange = e => {
     const { value } = e.target
-    if (!value) {
-      this.setState({
-        expandedKeys: [],
-        searchValue: '',
-        autoExpandParent: false
-      })
-      return
-    }
-    const expandedKeys = getKey(value, treeData, [])
+    const expandedKeys = dataList.map(item => {
+      if (item.title.indexOf(value) > -1) {
+        return getParentKey(item.key, gData)
+      }
+      return null
+    }).filter((item, i, self) => item && self.indexOf(item) === i)
     this.setState({
       expandedKeys,
       searchValue: value,
-      autoExpandParent: true
+      autoExpandParent: true,
     })
   };
 
@@ -104,34 +99,30 @@ class BasicTree extends React.Component {
           index > -1 ? (
             <span>
               {beforeStr}
-              <span style={{ color: '#f50' }}>{searchValue}</span>
+              <span className="site-tree-search-value">{searchValue}</span>
               {afterStr}
             </span>
           ) : (
             <span>{item.title}</span>
           )
-        if (item.treeData) {
-          return (
-            <TreeNode key={item.key} title={title}>
-              {loop(item.treeData)}
-            </TreeNode>
-          )
+        if (item.children) {
+          return { title, key: item.key, children: loop(item.children) }
         }
-        return <TreeNode key={item.key} title={title} />
+
+        return {
+          title,
+          key: item.key,
+        }
       })
     return (
-      <div className="shadow-radius">
-        <Row gutter={16}>
-          <Col span={6}>
-            <Input.Search style={{ marginBottom: 8 }} placeholder="Search" onChange={this.onChange} />
-            <Tree showLine checkable className="hide-file-icon" onSelect={this.onSelect} onCheck={this.onCheck} onExpand={this.onExpand} expandedKeys={expandedKeys} autoExpandParent={autoExpandParent}>
-              {loop(treeData)}
-            </Tree>
-          </Col>
-          <Col span={18}>
-            <h4 style={{ paddingTop: 5 }}>当前选中节点的key：{this.state.checkedKeys.toString()}</h4>
-          </Col>
-        </Row>
+      <div>
+        <Search style={{ marginBottom: 8 }} placeholder="Search" onChange={this.onChange} />
+        <Tree
+          onExpand={this.onExpand}
+          expandedKeys={expandedKeys}
+          autoExpandParent={autoExpandParent}
+          treeData={loop(gData)}
+        />
       </div>
     )
   }
