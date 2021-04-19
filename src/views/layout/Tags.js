@@ -1,11 +1,11 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { addTag, removeTag, emptyTag } from '@/redux/actions/tagList'
 import { menus } from '../../router/menus'
 import { Scrollbars } from 'react-custom-scrollbars'
 
-class Tags extends Component {
+class Tags extends React.Component {
   handChangeTag (activeKey) {
     if (this.props.location.pathname === activeKey) return
     this.props.history.push(activeKey)

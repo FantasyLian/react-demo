@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Radio, Row } from 'antd'
 import { withRouter } from 'react-router-dom'
 import { setUserInfo } from '@/redux/actions/userInfo'
@@ -8,7 +8,7 @@ import { connect } from 'react-redux'
 const RadioGroup = Radio.Group
 const RadioButton = Radio.Button
 
-class Toggle extends Component {
+class Toggle extends React.Component {
   state = { value: null };
 
   onChange = e => {

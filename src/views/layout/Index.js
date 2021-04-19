@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import SideMenu from './SideMenu'
 import TopHeader from './TopHeader'
@@ -6,7 +6,7 @@ import { setUserInfo } from '@/redux/actions/userInfo'
 import { Layout } from 'antd'
 import MainContent from './MainContent'
 import BreadCrumb from './BreadCrumb'
-class Index extends Component {
+class Index extends React.Component {
   render () {
     const { breadCrumb } = this.props
     return (

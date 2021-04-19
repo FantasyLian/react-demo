@@ -110,10 +110,10 @@ class BasicTree extends React.Component {
           ) : (
             <span>{item.title}</span>
           )
-        if (item.children) {
+        if (item.treeData) {
           return (
             <TreeNode key={item.key} title={title}>
-              {loop(item.children)}
+              {loop(item.treeData)}
             </TreeNode>
           )
         }

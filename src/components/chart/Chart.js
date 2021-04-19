@@ -1,9 +1,9 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { PropTypes } from 'prop-types'
 import echarts from 'echarts'
 import { debounce } from '@/utils'
 
-class Chart extends Component {
+class Chart extends React.Component {
   static propTypes = {
     width: PropTypes.string.isRequired,
     height: PropTypes.string.isRequired,
@@ -26,7 +26,7 @@ class Chart extends Component {
     window.addEventListener('resize', () => this.resize()) // 监听窗口，变化时重置图表
   }
 
-  componentWillReceiveProps (nextProps) {
+  componentDidUpdate (nextProps) {
     if (nextProps.collapse.isCollapsed !== this.props.collapse.isCollapsed) {
       this.resize()
     }

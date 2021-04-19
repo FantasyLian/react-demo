@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter, Link } from 'react-router-dom'
 import { Icon as LegacyIcon } from '@ant-design/compatible';
@@ -10,7 +10,7 @@ import { routes } from '@/router/routes'
 const { Sider } = Layout
 const { SubMenu } = Menu
 
-class SideNenu extends Component {
+class SideNenu extends React.Component {
   state = { menuSelected: this.props.history.location.pathname };
 
   handleFilter = permission => {

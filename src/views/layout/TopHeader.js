@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 
 import {
   BellOutlined,
@@ -20,7 +20,7 @@ import FullScreen from '@/components/FullScreen'
 import Tags from './Tags'
 import BasicDrawer from '@/components/BasicDrawer'
 
-class TopHeader extends Component {
+class TopHeader extends React.Component {
   state = { visible: false };
   handleLogout = () => {
     this.props.setUserInfo({})

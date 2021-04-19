@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Tabs, List, Button } from 'antd'
 import '@/assets/styles/news.less'
 const { TabPane } = Tabs
@@ -28,7 +28,7 @@ const news = [
     id: 3
   }
 ]
-export default class News extends Component {
+export default class News extends React.Component {
   state = { loading: false, dataSource: [] };
   componentDidMount () {
     this.setState({ loading: true })

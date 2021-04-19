@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import Particles from 'react-particles-js'
 import { Form } from '@ant-design/compatible';
 import '@ant-design/compatible/assets/index.css';
@@ -9,7 +9,7 @@ import { setUserInfo } from '@/redux/actions/userInfo'
 import '@/assets/styles/login.less'
 
 const FormItem = Form.Item
-class Login extends Component {
+class Login extends React.Component {
   state = { clientHeight: document.documentElement.clientHeight || document.body.clientHeight };
   constructor(props) {
     super(props)

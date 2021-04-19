@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Table, Divider, Modal, message } from 'antd'
 import EditForm from '../../components/EditForm'
 const { confirm } = Modal
-class TableEdit extends Component {
+class TableEdit extends React.Component {
   state = {
     data: [],
     pagination: {

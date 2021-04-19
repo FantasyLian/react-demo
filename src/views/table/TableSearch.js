@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { SearchOutlined } from '@ant-design/icons';
 import { Form } from '@ant-design/compatible';
 import '@ant-design/compatible/assets/index.css';
@@ -6,7 +6,7 @@ import { Table, Row, Col, Button, Select } from 'antd';
 import request from '@/utils/request'
 const FormItem = Form.Item
 const { Option } = Select
-class TableSearch extends Component {
+class TableSearch extends React.Component {
   state = {
     data: [],
     pagination: {

@@ -3,7 +3,7 @@ import { Form } from '@ant-design/compatible';
 import '@ant-design/compatible/assets/index.css';
 import { Input, Button } from 'antd';
 class EditForm extends React.Component {
-  componentWillReceiveProps (nextProps) {
+  componentDidUpdate (nextProps) {
     !nextProps.visible && this.props.form.resetFields()
   }
   render () {
@@ -62,4 +62,4 @@ class EditForm extends React.Component {
     );
   }
 }
-export default Form.create()(EditForm)
+export default EditForm

@@ -1,9 +1,9 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Row } from 'antd'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-class Intercept extends Component {
+class Intercept extends React.Component {
   state = { value: null };
 
   onChange = e => {

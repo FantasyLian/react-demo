@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Table } from 'antd'
 import request from '@/utils/request'
 
-class TableBasic extends Component {
+class TableBasic extends React.Component {
   state = {
     data: [],
     pagination: {},
