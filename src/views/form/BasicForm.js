@@ -1,211 +1,121 @@
 import React from 'react'
-import { QuestionCircleOutlined } from '@ant-design/icons'
-// import { Form } from '@ant-design/compatible';
-// import '@ant-design/compatible/assets/index.css';
-import { Form, Input, Tooltip, Cascader, Select, Row, Col, Checkbox, Button } from 'antd'
+import { Form, Input, Button, Select } from 'antd'
 const { Option } = Select
-
-const residences = [
-  {
-    value: 'zhejiang',
-    label: 'Zhejiang',
-    children: [
-      {
-        value: 'hangzhou',
-        label: 'Hangzhou',
-        children: [
-          {
-            value: 'xihu',
-            label: 'West Lake'
-          }
-        ]
-      }
-    ]
+const layout = {
+  labelCol: {
+    span: 8,
   },
-  {
-    value: 'jiangsu',
-    label: 'Jiangsu',
-    children: [
-      {
-        value: 'nanjing',
-        label: 'Nanjing',
-        children: [
-          {
-            value: 'zhonghuamen',
-            label: 'Zhong Hua Men'
-          }
-        ]
-      }
-    ]
-  }
-]
+  wrapperCol: {
+    span: 16,
+  },
+}
+const tailLayout = {
+  wrapperCol: {
+    offset: 8,
+    span: 16,
+  },
+}
 
 export default class BasicForm extends React.Component {
-  state = {
-    confirmDirty: false
-  };
+  formRef = React.createRef();
+  onGenderChange = (value) => {
+    switch (value) {
+      case 'male':
+        this.formRef.current.setFieldsValue({
+          note: 'Hi, 先生!',
+        })
+        return
 
-  handleSubmit = e => {
-    e.preventDefault()
-    this.props.form.validateFieldsAndScroll((err, values) => {
-      if (!err) {
-        console.log('Received values of form: ', values)
-      }
+      case 'female':
+        this.formRef.current.setFieldsValue({
+          note: 'Hi, 女士!',
+        })
+        return
+
+      default:
+        this.formRef.current.setFieldsValue({
+          note: 'Hi there!',
+        })
+    }
+  };
+  onFinish = (values) => {
+    console.log(values)
+  };
+  onReset = () => {
+    this.formRef.current.resetFields()
+  };
+  onFill = () => {
+    this.formRef.current.setFieldsValue({
+      note: 'Hello world!',
+      gender: '男性',
     })
   };
 
-  handleConfirmBlur = e => {
-    const { value } = e.target
-    this.setState({ confirmDirty: this.state.confirmDirty || !!value })
-  };
-
-  compareToFirstPassword = (rule, value, callback) => {
-    const { form } = this.props
-    if (value && value !== form.getFieldValue('password')) {
-      callback('Two passwords that you enter is inconsistent!')
-    } else {
-      callback()
-    }
-  };
-
-  validateToNextPassword = (rule, value, callback) => {
-    const { form } = this.props
-    if (value && this.state.confirmDirty) {
-      form.validateFields(['confirm'], { force: true })
-    }
-    callback()
-  };
-
   render () {
-    const { getFieldDecorator } = this.props.form
-
-    const formItemLayout = {
-      labelCol: {
-        sm: { span: 9 }
-      },
-      wrapperCol: {
-        sm: { span: 6 }
-      }
-    }
-    const tailFormItemLayout = {
-      wrapperCol: {
-        sm: {
-          span: 9,
-          offset: 9
-        }
-      }
-    }
-    const prefixSelector = getFieldDecorator('prefix', {
-      initialValue: '86'
-    })(
-      <Select style={{ width: 70 }}>
-        <Option value="86">+86</Option>
-        <Option value="87">+87</Option>
-      </Select>
-    )
-
     return (
-      <div className="shadow-radius">
-        <div className="public-title">
-          <h1>注册表单</h1>
-          <h1>
-            更多表单参考：<a target="_blank" href="https://ant.design/components/form-cn/" rel="noopener noreferrer">Form </a>
-          </h1>
-        </div>
-        <Form {...formItemLayout} onSubmit={this.handleSubmit}>
-          <Form.Item label="邮箱">
-            {getFieldDecorator('email', {
-              rules: [
-                {
-                  type: 'email',
-                  message: '请输入正确邮箱！'
-                },
-                {
-                  required: true,
-                  message: '请输入邮箱！'
-                }
-              ]
-            })(<Input />)}
-          </Form.Item>
-          <Form.Item label="密码" hasFeedback>
-            {getFieldDecorator('password', {
-              rules: [
-                {
-                  required: true,
-                  message: '请输入密码！'
-                },
-                {
-                  validator: this.validateToNextPassword
-                }
-              ]
-            })(<Input.Password />)}
-          </Form.Item>
-          <Form.Item label="确认密码" hasFeedback>
-            {getFieldDecorator('confirm', {
-              rules: [
-                {
-                  required: true,
-                  message: '请确认密码！'
-                },
-                {
-                  validator: this.compareToFirstPassword
-                }
-              ]
-            })(<Input.Password onBlur={this.handleConfirmBlur} />)}
-          </Form.Item>
-          <Form.Item
-            label={
-              <span>
-                昵称&nbsp;
-								<Tooltip title="您希望别人叫你什么？">
-                  <QuestionCircleOutlined />
-                </Tooltip>
-              </span>
-            }
+      <Form {...layout} ref={this.formRef} name="control-ref" onFinish={this.onFinish} style={{ width: '500px' }}>
+        <Form.Item
+          name="note"
+          label="注释"
+          rules={[
+            {
+              required: true,
+            },
+          ]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          name="gender"
+          label="性别"
+          rules={[
+            {
+              required: true,
+            },
+          ]}
+        >
+          <Select
+            placeholder="选择一个选项并更改上面的输入文本"
+            onChange={this.onGenderChange}
+            allowClear
           >
-            {getFieldDecorator('nickname', {
-              rules: [{ required: true, message: '请输入昵称！', whitespace: true }]
-            })(<Input />)}
-          </Form.Item>
-          <Form.Item label="常居地">
-            {getFieldDecorator('residence', {
-              initialValue: ['zhejiang', 'hangzhou', 'xihu'],
-              rules: [{ type: 'array', required: true, message: '请选择常居地！' }]
-            })(<Cascader options={residences} />)}
-          </Form.Item>
-          <Form.Item label="手机号码">
-            {getFieldDecorator('phone', {
-              rules: [{ required: true, message: '请输入手机号码！' }]
-            })(<Input addonBefore={prefixSelector} style={{ width: '100%' }} />)}
-          </Form.Item>
-          <Form.Item label="验证码" extra="我们必须确认你不是机器人.">
-            <Row gutter={8}>
-              <Col span={12}>
-                {getFieldDecorator('captcha', {
-                  rules: [{ required: true, message: '请输入验证码！' }]
-                })(<Input />)}
-              </Col>
-              <Col span={12}>
-                <Button>获取验证码</Button>
-              </Col>
-            </Row>
-          </Form.Item>
-          <Form.Item {...tailFormItemLayout}>
-            {getFieldDecorator('agreement', {
-              valuePropName: 'checked'
-            })(
-              <Checkbox>
-                我已经阅读过 <a href="#/agreement">协议</a>
-              </Checkbox>
-            )}
-          </Form.Item>
-          <Form.Item {...tailFormItemLayout}>
-            <Button type="primary" htmlType="submit">
-              注册
-						</Button>
-          </Form.Item>
-        </Form>
-      </div>
+            <Option value="male">男</Option>
+            <Option value="female">女</Option>
+            <Option value="other">其他</Option>
+          </Select>
+        </Form.Item>
+        <Form.Item
+          noStyle
+          shouldUpdate={(prevValues, currentValues) => prevValues.gender !== currentValues.gender}
+        >
+          {({ getFieldValue }) =>
+            getFieldValue('gender') === 'other' ? (
+              <Form.Item
+                name="customizeGender"
+                label="自定义 性别"
+                rules={[
+                  {
+                    required: true,
+                  },
+                ]}
+              >
+                <Input />
+              </Form.Item>
+            ) : null
+          }
+        </Form.Item>
+        <Form.Item {...tailLayout}>
+          <Button type="primary" htmlType="submit" style={{ 'marginRight': '10px' }}>
+            提交
+          </Button>
+          <Button htmlType="button" onClick={this.onReset}>
+            重置
+          </Button>
+          <Button type="link" htmlType="button" onClick={this.onFill}>
+            填充表单
+          </Button>
+        </Form.Item>
+      </Form>
     )
   }
 }
