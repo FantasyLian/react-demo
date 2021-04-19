@@ -49,7 +49,7 @@ class TableEdit extends Component {
     currentRow: null
   };
 
-  componentWillMount () {
+  componentDidMount () {
     const { pageSize, current } = this.state.pagination
     this.fetch(current, pageSize)
   }

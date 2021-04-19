@@ -29,7 +29,7 @@ class TableBasic extends Component {
     ]
   };
 
-  componentWillMount () {
+  componentDidMount () {
     this.fetch()
   }
 

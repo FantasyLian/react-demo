@@ -36,7 +36,7 @@ class TableSearch extends Component {
     ]
   };
 
-  componentWillMount () {
+  componentDidMount () {
     this.fetch()
   }
 
